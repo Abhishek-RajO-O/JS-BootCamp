@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PositionEvents</title>
-</head>
-<body style="background-color: #212121; height: 100vh;">
-    <!-- Hello -->
-</body>
-<script>
-    const body = document.body;
+ const body = document.body;
 
     const createDiv = function(x,y){
         const div = document.createElement('div');
@@ -18,11 +7,11 @@
         div.style.position = "fixed";
         div.style.top = y+'px';
         div.style.left = x+'px';
+        
+        
         return div;
     }
 
     body.addEventListener('click', (e)=>{        
         body.appendChild(createDiv(e.clientX,e.clientY));
     })
-</script>
-</html>
