@@ -118,9 +118,19 @@ const promiseThree = new Promise(function(resolve,reject){
 // })
 // .catch((error) => console.log(error))
 
-
+let a = null , b = null ;
 const p = await Promise.all([promisOne,promiseThree]);
 setTimeout(()=>{
-    console.log(p);
-    
-},1000)
+        [a,b] = p;
+        console.log(a);
+        console.log(b);
+        
+},1000);
+
+// async function getPrice() {
+//   const [choice, prices] = await Promise.all([
+//     promptForDishChoice(),
+//     fetchPrices(),
+//   ]);
+//   return prices[choice];
+// }
