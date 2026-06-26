@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      img{
+        height: 50vh;
+        width: 50vh;;
+      }
+    </style>
+    <title>XML Way</title>
+  </head>
+  <body style="background-color: #212121; color: #fff; ">
+    <div class="container" style="display: flex;justify-content: center;" >
+      <div class="card" style="display: flex; align-items:center; flex-direction: column;margin: 10vh; border: #fff solid .25rem; border-radius: 1rem; padding: 1rem; width: 60vh;" ></div>
+    </div>
+    <div class="table" style="display: flex; justify-content: center;">
+      <table>
+        <thead>
+          <tr>
+            <th>Value</th>
+            <th>State</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>0</code></td>
+            <td><code>UNSENT</code></td>
+            <td>
+              Client has been created. <code>open()</code> not called yet.
+            </td>
+          </tr>
+          <tr>
+            <td><code>1</code></td>
+            <td><code>OPENED</code></td>
+            <td><code>open()</code> has been called.</td>
+          </tr>
+          <tr>
+            <td><code>2</code></td>
+            <td><code>HEADERS_RECEIVED</code></td>
+            <td>
+              <code>send()</code> has been called, and headers and status are
+              available.
+            </td>
+          </tr>
+          <tr>
+            <td><code>3</code></td>
+            <td><code>LOADING</code></td>
+            <td>Downloading; <code>responseText</code> holds partial data.</td>
+          </tr>
+          <tr>
+            <td><code>4</code></td>
+            <td><code>DONE</code></td>
+            <td>The operation is complete.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script>
+    // AJAX request
+    const requestURL = "https://api.github.com/users/Abhishek-RajO-O";
+    const xhr = new XMLHttpRequest();
+    console.log(xhr.readyState);
+    let data = null;
+    xhr.onreadystatechange = function (){
+      console.log(xhr.readyState);
+      if(xhr.readyState === 4){
+        data = this.responseText;
+        console.log(typeof data);
+        data = JSON.parse(data);
+        console.log((data));
+        // console.log(this.responseText);
+        const card = document.querySelector(".card");
+        const avatar = document.createElement('img');
+    // console.log(card);
+        const avatarUrl = data.avatar_url;
+        console.log(avatarUrl);
+        avatar.src = avatarUrl;
+        card.appendChild(avatar);
+        // name
+
+        const UserID = data.login;
+        const name = document.createElement('h2');
+        name.innerText =  `${UserID}`;
+        card.appendChild(name);
+        
+        // follwers
+        const followerCount = data.followers;
+        const followers = document.createElement('span');
+        followers.innerText =  `${followerCount} followers`;
+        card.appendChild(followers)
+
+      }
+    }
+    xhr.open('GET',requestURL,true)//method,url,asyconsos or not
+    xhr.send();
+  </script>
+</html>
